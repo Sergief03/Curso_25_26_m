@@ -74,7 +74,30 @@ let resultados=usuarios.find((usuario)=> Number(usuario.edad) >= 28)??{};
 usuarios.filter((usuario)=> usuario.data.libros>20).map((usuarios)=> usuarios.nombre);
 
 //Obetener el valor promedio total de todos los libros si suponemos un precio medio de 28 euros por libro
-usuarios.reduce((total,usuario)=> total+(usuario.data.libros*28),0)/usuarios.length;
+usuarios.reduce((total,usuario)=> total+(usuario.data.libros*28),0);
 //Decir que usuarios no tienen libros
 usuarios.filter(usuario=> usuarios.data.libros===0).map(usuario=>usuario.nombre);
 
+const productos = [
+    { id: 1, nombre: 'Laptop', precio: 1200, stock: 5, categoria: 'Tecnologia' },
+    { id: 2, nombre: 'Camiseta', precio: 35, stock: 15, categoria: 'Ropa' },
+    { id: 3, nombre: 'Monitor', precio: 300, stock: 0, categoria: 'Tecnologia' },
+    { id: 4, nombre: 'Movil', precio: 800, stock: 10, categoria: 'Tecnologia' },
+    { id: 5, nombre: 'Libro', precio: 20, stock: 50, categoria: 'Literatura' },
+    { id: 6, nombre: 'Pantalón', precio: 60, stock: 5, categoria: 'Ropa' },
+];
+
+// 1.- Nombres de productos agotados
+productos.filter(producto => producto.stock===0).map(producto=>producto.nombre);
+
+// 2.- Valor total del inventario
+productos.reduce((total,producto)=> total+producto.precio*producto.stock,0);
+
+// 3.- Productos de 'Tecnologia' con precio > 500
+productos.filter(producto=> producto.categoria.toLowerCase()==='tecnologia' && producto.precio>500).map(producto=>producto.nombre);
+
+// 4.- Nuevo array con 10% de descuento en 'Ropa'
+
+//productos.filter(producto=>producto.categoria.toLowerCase()==='ropa').map(producto=> producto.precio*0.9);
+
+productos.map(producto =>producto.categoria === "Ropa" ? {...producto, precio:producto.precio*0.9} : producto);
